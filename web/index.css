@@ -1,0 +1,95 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
+#ship-icon {
+    width: 200px;
+    height: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#search-box:focus {
+    outline: 0;
+}
+
+
+#search-box {
+    border-width: 0;
+    border-radius: 6px;
+    font-family: 'Courier New', Courier, monospace;
+    box-shadow: rgba(0, 0, 0, 0.07) 0 1px 1px, rgba(0, 0, 0, 0.07) 0 2px 2px, rgba(0, 0, 0, 0.07) 0 4px 4px, rgba(0, 0, 0, 0.07) 0 8px 8px, rgba(0, 0, 0, 0.07) 0 16px 16px;
+}
+
+#app-title {
+    opacity: 0;
+    text-align: center;
+}
+
+#search-submit {
+    display: flex;
+    justify-content: center;
+}
+
+#website-category {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+button {
+    background-color: transparent;
+    border-width: 0;
+    border-radius: 6px;
+    position: relative;
+    left: 15px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.07) 0 1px 1px, rgba(0, 0, 0, 0.07) 0 2px 2px, rgba(0, 0, 0, 0.07) 0 4px 4px, rgba(0, 0, 0, 0.07) 0 8px 8px, rgba(0, 0, 0, 0.07) 0 16px 16px;
+}
+
+select {
+    border-radius: 6px;
+    border-width: 0;
+    background-color: transparent;
+    box-shadow: rgba(0, 0, 0, 0.07) 0 1px 1px, rgba(0, 0, 0, 0.07) 0 2px 2px, rgba(0, 0, 0, 0.07) 0 4px 4px, rgba(0, 0, 0, 0.07) 0 8px 8px, rgba(0, 0, 0, 0.07) 0 16px 16px;
+    position: relative;
+    border-style: solid;
+}
+
+select:active {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#available-categories {
+    left: 15px;
+}
+
+#search-results {
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 5%;    
+    border-radius: 6px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;    
+}
+
+.search-result {
+    padding-top: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
+    font-size: small;
+    color: rgba(29, 29, 29, 0.774);
+    font-family: 'Courier New', Courier, monospace;
+    border-radius: 6px;
+    gap: 5%;
+    justify-content: space-around;
+}
+
+.search-result-name {
+    width: 40%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

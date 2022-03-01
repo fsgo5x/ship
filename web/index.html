@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <title>Ship</title>
+    <script type='text/javascript' src='http://localhost:8686/eel.js'></script>
+    <script type='text/javascript'>eel._host = "http://localhost:8686"</script>
+    <script type='text/javascript' src="bftr.js" defer></script>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+</head>
+
+<body>
+    <h1 id="app-title">Ship</h1>
+    <img id="ship-icon" src="assets/shipicon.svg"></img>
+    <div id="search-options"></div>
+    <form id="search-form" onsubmit="onSubmit(); return false">
+    <div id="search-submit">
+        <input type="search" name="search-term" id="search-box" placeholder="Search"></input>
+        <button type="submit" id="search-button"><i class="las la-search"></i></button>
+    </div>
+    <div id="website-category">
+        
+    </div>
+    </form>
+    <div id="search-results">
+    </div>
+</body>
+
+</html>

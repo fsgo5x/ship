@@ -14,25 +14,26 @@ XML_TABLE = lxml.html.fromstring(
     <td class="coll-5 uploader"><a href="/user/SirMadMax/">SirMadMax</a>
     </td>
 </tr>
-            """)
+            """
+)
 
 VALID_TORRENT_INFO = {
-    'name': 'DOOM.Eternal-CODEX',
-    'relative link': '/torrent/4367203/DOOM-Eternal-CODEX/',
-    'seeds': '107',
-    'leeches': '123',
-    'date created': 'Mar. 30th \'20',
-    'size': '38.8 GB',
-    'uploader': 'SirMadMax'
+    "name": "DOOM.Eternal-CODEX",
+    "relative link": "/torrent/4367203/DOOM-Eternal-CODEX/",
+    "seeds": "107",
+    "leeches": "123",
+    "date created": "Mar. 30th '20",
+    "size": "38.8 GB",
+    "uploader": "SirMadMax",
 }
 
 
 def test_has_valid_info_type_returns_true_on_all_string_values():
-    assert tssx.parser.has_valid_info_value_type(VALID_TORRENT_INFO)
+    assert tssx.parser._has_valid_info_value_type(VALID_TORRENT_INFO)
 
 
 def test_has_valid_info_keys_returns_true_on_valid_keys():
-    assert tssx.parser.has_valid_info_keys(VALID_TORRENT_INFO)
+    assert tssx.parser._has_valid_info_keys(VALID_TORRENT_INFO)
 
 
 def test_parse_from_tssx_tr_tag_returns_valid_torrent_info():

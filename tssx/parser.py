@@ -75,24 +75,18 @@ def from_tssx_tr_tag(tssx_tr_tag):
         element_coll = element.get("class").split()[0]
         if element_coll == "coll-1":
             torrent_info_data["name"] = _get_table_name(element)
-            torrent_info_data["relative link"] = _get_table_relative_link(
-                element
-            )
+            torrent_info_data["relative link"] = _get_table_relative_link(element)
         else:
-            element_content = _content_of_coll(
-                element_coll, element)
-            torrent_info_data[_COLL_TO_NAME[element_coll]
-                              ] = element_content
+            element_content = _content_of_coll(element_coll, element)
+            torrent_info_data[_COLL_TO_NAME[element_coll]] = element_content
     is_valid_info(torrent_info_data)
     return torrent_info_data
 
 
-@eel.expose
 def tssx_page_to_json(tssx_page):
     result = []
     tbody_tag_xpath = "/html/body/main/div/div/div/div[2]/div[1]/table/tbody"
-    tbodys = lxml.html.fromstring(tssx_page).xpath(
-        tbody_tag_xpath)[0].getchildren()
+    tbodys = lxml.html.fromstring(tssx_page).xpath(tbody_tag_xpath)[0].getchildren()
     if len(tbodys) < 1:
         return None
     for tr_tag in tbodys:

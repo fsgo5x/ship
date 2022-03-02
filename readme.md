@@ -16,6 +16,7 @@ While on the projects root folder enter the following commands:
 ```
 cd web; npm install; cd..
 pip install eel lxml lxml.html cssselector
+python3 main.py
 ```
 #### Java Script Requirements:
 * electron

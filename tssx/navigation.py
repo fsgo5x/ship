@@ -4,13 +4,11 @@ import requests
 import base64
 
 
-_UNSUCCESSFUL_TSSX_REQUEST_EXCEPTION = Exception(
-    "1377x Request was not successfull")
+_UNSUCCESSFUL_TSSX_REQUEST_EXCEPTION = Exception("1377x Request was not successfull")
 
 _NOT_A_VALID_TSSX_CATEGORY_EXCEPTION = Exception("Got invalid tssx category")
 
 
-@eel.expose
 def tssx_get_available_categories():
     return [
         "all categories",
@@ -31,7 +29,6 @@ def _fetch_page_content(url):
     return server_response.content
 
 
-@eel.expose
 def tssx_search(search_term, category="all categories", page_number=1):
     default_search_term = f"https://www.1377x.to/search/{search_term}/{page_number}/"
     categorized_search_term = (
@@ -47,11 +44,9 @@ def tssx_search(search_term, category="all categories", page_number=1):
     return page_content
 
 
-@eel.expose
 def tssx_get_magnet_link(relative_torrent_link):
     magnet_link_xpath = "/html/body/main/div/div/div/div[2]/div[1]/ul[1]/li[1]/a"
-    tssx_response = requests.get(
-        f"https://www.1377x.to{relative_torrent_link}")
+    tssx_response = requests.get(f"https://www.1377x.to{relative_torrent_link}")
     if tssx_response.status_code != 200:
         raise _UNSUCCESSFUL_TSSX_REQUEST_EXCEPTION
     return (

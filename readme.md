@@ -1,4 +1,6 @@
-<img src='assets/logo.png' width='50%' align='center'/>
+<p align='center'>
+<img src='assets/logo.png' width='50%'/>
+</p>
 <br>
 
 # Brief Demonstration

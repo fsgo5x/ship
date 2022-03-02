@@ -6,44 +6,8 @@ const getSelectedWebsite = () => {
     return selectElement.value;
 };
 
-/*
- * const onWebsiteChange = () => {
- *     const website = getSelectedWebsite()
- *     const availableCategories = eel.get_available_categories_from(website);
- * }
- */
-
-
 const createSelectOption = (optionValue) => {
     return '<option  value="' + optionValue + '">' + optionValue + "</option>";
-};
-
-const displayAvailableWebsites = async () => {
-    const availableWebsites = await eel.get_available_websites()();
-    const availableWebsitesOptions = availableWebsites.map(
-        (item) => createSelectOption(item)
-    );
-    let selectTag = '<select onchange="onWebsiteChange()"' +
-        ' name="selected-website" id="available-websites">';
-    for (let i = 0; i < availableWebsitesOptions.length; i++) {
-        selectTag += availableWebsitesOptions[i];
-    }
-    selectTag += "</select>";
-    const div = document.getElementById("website-category");
-    div.insertAdjacentHTML("beforeend", selectTag);
-};
-
-const displayWebsiteCategories = async (website) => {
-    const availableCategories =
-        await eel.get_available_categories_from(website)();
-    let selectTag = '<select id= "available-categories"' +
-        ' name="selected-category">';
-    for (let i = 0; i < availableCategories.length; i++) {
-        selectTag += createSelectOption(availableCategories[i]);
-    }
-    selectTag += "</select>";
-    const div = document.getElementById("website-category");
-    div.insertAdjacentHTML("beforeend", selectTag);
 };
 
 const removeAllChildNodes = (parent) => {
@@ -78,28 +42,8 @@ const getNameTag = (name) => {
 const getDownloadTag = (relative_link) => {
     const onClickFunction = "eel.download(\"" +
         getSelectedWebsite() + "\", \"" + relative_link + "\")";
-    console.log(relative_link, onClickFunction);
     const icon = '<i class="las la-download"></i>';
     return "<button onclick='" + onClickFunction + "'>" + icon + "</button>";
-};
-
-const displaySearchResults = (jsonData) => {
-    const searchResultsTag = document.getElementById("search-results");
-    const hasSearchResults = searchResultsTag.childNodes.length > 0;
-    if (hasSearchResults) {
-        removeAllChildNodes(searchResultsTag);
-    }
-    for (let i = 0; i < jsonData.length; i++) {
-        let wrapperTag = '<div class="search-result">';
-        let detailWrapperTag = '<div class="detail-wrapper">'
-        detailWrapperTag += getSeedTag(jsonData[i]["seeds"]) +
-            getSizeTag(jsonData[i]["size"]) +
-            getUploaderTag(jsonData[i]["uploader"]) +
-            getDownloadTag(jsonData[i]["relative link"]) +
-            '</div>';
-        wrapperTag += getNameTag(jsonData[i]["name"]) + detailWrapperTag;
-        searchResultsTag.insertAdjacentHTML("beforeend", wrapperTag);
-    }
 };
 
 const onSubmit = async () => {
@@ -111,6 +55,73 @@ const onSubmit = async () => {
         await eel.get_json_data_from(website, searchTerm, category)()
     );
     displaySearchResults(jsonData);
+};
+
+
+/*
+ *
+ * const onWebsiteChange = () => {
+ *     const website = getSelectedWebsite()
+ *     const availableCategories = eel.get_available_categories_from(website);
+ * }
+ */
+
+
+const displayAvailableWebsites = async () => {
+    const availableWebsites = await eel.get_available_websites()();
+    const availableWebsitesOptions = availableWebsites.map(
+        (item) => createSelectOption(item)
+    );
+    let selectTag = '<select onchange="onWebsiteChange()"' +
+        ' name="selected-website" id="available-websites">';
+    for (let i = 0; i < availableWebsitesOptions.length; i++) {
+        selectTag += availableWebsitesOptions[i];
+    }
+    selectTag += "</select>";
+    const div = document.getElementById("website-category");
+    div.insertAdjacentHTML("beforeend", selectTag);
+};
+
+const displayWebsiteCategories = async (website) => {
+    const availableCategories =
+        await eel.get_available_categories_from(website)();
+    let selectTag = '<select id= "available-categories"' +
+        ' name="selected-category">';
+    for (let i = 0; i < availableCategories.length; i++) {
+        selectTag += createSelectOption(availableCategories[i]);
+    }
+    selectTag += "</select>";
+    const div = document.getElementById("website-category");
+    div.insertAdjacentHTML("beforeend", selectTag);
+};
+
+const getDetailsTag = (jsonDataItem) => {
+    let detailsTag = '<div class="detail-wrapper">'
+    detailsTag += getSeedTag(jsonDataItem["seeds"]) +
+        getSizeTag(jsonDataItem["size"]) +
+        getUploaderTag(jsonDataItem["uploader"]) +
+        getDownloadTag(jsonDataItem["relative link"]) + '</div>';
+    return detailsTag;
+}
+
+const getSearchResultTag = (jsonDataItem) => {
+    let searchResultTag = '<div class="search-result">';
+    searchResultTag += getNameTag(jsonDataItem["name"]) +
+        getDetailsTag(jsonDataItem);
+    return searchResultTag
+}
+
+const displaySearchResults = (jsonData) => {
+    const searchResultsTag = document.getElementById("search-results");
+    const hasSearchResults = searchResultsTag.childNodes.length > 0;
+    if (hasSearchResults) {
+        removeAllChildNodes(searchResultsTag);
+    }
+    for (let i = 0; i < jsonData.length; i++) {
+        searchResultsTag.insertAdjacentHTML(
+            "beforeend", getSearchResultTag(jsonData[i])
+        );
+    }
 };
 
 displayAvailableWebsites();
